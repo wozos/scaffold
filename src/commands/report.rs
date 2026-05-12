@@ -14,10 +14,10 @@ use serde_json::Value;
 
 use super::doctor::build_doctor_report;
 use super::localnet::build_localnet_status_for_project;
+use crate::constants::GUEST_BIN_REL_PATH;
 use crate::model::{
     CollectedItem, RedactionSummary, ReportManifest, SkippedItem, ToolCommandResult,
 };
-use crate::constants::GUEST_BIN_REL_PATH;
 use crate::process::{set_command_echo, which};
 use crate::project::load_project;
 use crate::state::write_text;
