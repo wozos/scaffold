@@ -74,11 +74,7 @@ pub(crate) fn cmd_setup_basecamp(project: &mut crate::model::Project) -> DynResu
     } else {
         RepoSyncOptions::fail_on_source_mismatch()
     };
-    sync_repo_to_pin(
-        repo,
-        "logos-module-builder",
-        sync_opts,
-    )?;
+    sync_repo_to_pin(repo, "logos-module-builder", sync_opts)?;
 
     println!("setup complete");
     println!("  logos-module-builder: {}", repo.path);

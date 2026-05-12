@@ -54,7 +54,8 @@ fn create_help_lists_basecamp_qml_template() {
 #[test]
 fn new_basecamp_qml_creates_expected_files() {
     let temp = tempdir().expect("tempdir");
-    let module_builder = init_git_repo_with_commit(&temp.path().join("module-builder"), "README.md");
+    let module_builder =
+        init_git_repo_with_commit(&temp.path().join("module-builder"), "README.md");
     let bin_dir = prepare_basecamp_bin_dir(temp.path());
 
     Command::new(assert_cmd::cargo::cargo_bin!("logos-scaffold"))
@@ -92,7 +93,8 @@ fn new_basecamp_qml_creates_expected_files() {
 #[test]
 fn new_basecamp_qml_vendor_deps_vendors_module_builder_repo() {
     let temp = tempdir().expect("tempdir");
-    let module_builder = init_git_repo_with_commit(&temp.path().join("module-builder"), "README.md");
+    let module_builder =
+        init_git_repo_with_commit(&temp.path().join("module-builder"), "README.md");
     let bin_dir = prepare_basecamp_bin_dir(temp.path());
 
     Command::new(assert_cmd::cargo::cargo_bin!("logos-scaffold"))
@@ -111,7 +113,10 @@ fn new_basecamp_qml_vendor_deps_vendors_module_builder_repo() {
     let vendored_repo = temp
         .path()
         .join("vendored-app/.scaffold/repos/logos-module-builder/.git");
-    assert!(vendored_repo.exists(), "expected vendored module-builder repo");
+    assert!(
+        vendored_repo.exists(),
+        "expected vendored module-builder repo"
+    );
 }
 
 #[test]

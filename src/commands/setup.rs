@@ -2,8 +2,8 @@ use std::env;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use crate::process::run_checked;
 use crate::constants::PROJECT_KIND_BASECAMP_QML;
+use crate::process::run_checked;
 use crate::project::{ensure_dir_exists, load_project, require_lez_repo, save_project_config};
 use crate::repo::{sync_repo_to_pin, RepoSyncOptions};
 use crate::state::prepare_wallet_home;

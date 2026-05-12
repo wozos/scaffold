@@ -160,23 +160,25 @@ pub(crate) fn parse_config(text: &str) -> DynResult<Config> {
         bail!("invalid scaffold.toml: missing required repos.lez keys (also accepts legacy repos.lssa)");
     }
 
-    let logos_module_builder =
-        if module_builder_source.is_empty() && module_builder_path.is_empty() && module_builder_pin.is_empty() {
-            None
-        } else {
-            if module_builder_source.is_empty()
-                || module_builder_path.is_empty()
-                || module_builder_pin.is_empty()
-            {
-                bail!("invalid scaffold.toml: missing required repos.logos_module_builder keys");
-            }
-            Some(RepoRef {
-                url: module_builder_url,
-                source: module_builder_source,
-                path: module_builder_path,
-                pin: module_builder_pin,
-            })
-        };
+    let logos_module_builder = if module_builder_source.is_empty()
+        && module_builder_path.is_empty()
+        && module_builder_pin.is_empty()
+    {
+        None
+    } else {
+        if module_builder_source.is_empty()
+            || module_builder_path.is_empty()
+            || module_builder_pin.is_empty()
+        {
+            bail!("invalid scaffold.toml: missing required repos.logos_module_builder keys");
+        }
+        Some(RepoRef {
+            url: module_builder_url,
+            source: module_builder_source,
+            path: module_builder_path,
+            pin: module_builder_pin,
+        })
+    };
 
     if wallet_home_dir.is_empty() {
         wallet_home_dir = ".scaffold/wallet".to_string();

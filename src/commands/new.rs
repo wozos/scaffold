@@ -6,10 +6,11 @@ use anyhow::{bail, Context};
 
 use crate::config::serialize_config;
 use crate::constants::{
-    BASECAMP_RUNTIME_DEV, BASECAMP_RUNTIME_PORTABLE, DEFAULT_BASECAMP_DATA_ROOT, DEFAULT_FRAMEWORK_IDL_PATH,
-    DEFAULT_FRAMEWORK_IDL_SPEC, DEFAULT_FRAMEWORK_VERSION, DEFAULT_LEZ_PIN,
-    DEFAULT_LOGOS_MODULE_BUILDER_PIN, FRAMEWORK_KIND_DEFAULT, FRAMEWORK_KIND_LEZ_FRAMEWORK,
-    LEZ_URL, LOGOS_MODULE_BUILDER_URL, PROJECT_KIND_BASECAMP_QML, PROJECT_KIND_LEZ, VERSION,
+    BASECAMP_RUNTIME_DEV, BASECAMP_RUNTIME_PORTABLE, DEFAULT_BASECAMP_DATA_ROOT,
+    DEFAULT_FRAMEWORK_IDL_PATH, DEFAULT_FRAMEWORK_IDL_SPEC, DEFAULT_FRAMEWORK_VERSION,
+    DEFAULT_LEZ_PIN, DEFAULT_LOGOS_MODULE_BUILDER_PIN, FRAMEWORK_KIND_DEFAULT,
+    FRAMEWORK_KIND_LEZ_FRAMEWORK, LEZ_URL, LOGOS_MODULE_BUILDER_URL, PROJECT_KIND_BASECAMP_QML,
+    PROJECT_KIND_LEZ, VERSION,
 };
 use crate::model::{
     BasecampConfig, Config, FrameworkConfig, FrameworkIdlConfig, LocalnetConfig, ProjectConfig,
@@ -111,12 +112,7 @@ fn create_lez_project(cmd: NewCommand) -> DynResult<()> {
         patch_simple_tail_call_program_id(&target)?;
     }
 
-    let overlay_ctx = build_overlay_context(
-        &cmd.name,
-        &cfg,
-        &crate_name,
-        "",
-    );
+    let overlay_ctx = build_overlay_context(&cmd.name, &cfg, &crate_name, "");
     apply_overlay(&target, &template_variant, &overlay_ctx)?;
     if template_variant == FRAMEWORK_KIND_LEZ_FRAMEWORK {
         cleanup_lez_hello_artifacts(&target)?;
@@ -206,12 +202,8 @@ fn create_basecamp_qml_project(cmd: NewCommand) -> DynResult<()> {
     };
 
     let module_builder_flake_url = format!("path:{}", module_builder_repo_path.display());
-    let overlay_ctx = build_overlay_context(
-        &cmd.name,
-        &cfg,
-        &crate_name,
-        &module_builder_flake_url,
-    );
+    let overlay_ctx =
+        build_overlay_context(&cmd.name, &cfg, &crate_name, &module_builder_flake_url);
     apply_overlay(&target, PROJECT_KIND_BASECAMP_QML, &overlay_ctx)?;
     write_text(&target.join("scaffold.toml"), &serialize_config(&cfg))?;
 

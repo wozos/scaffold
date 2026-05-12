@@ -4,8 +4,8 @@ use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, bail};
 
-use crate::constants::{PROJECT_KIND_BASECAMP_QML, PROJECT_KIND_LEZ};
 use crate::config::{parse_config, serialize_config};
+use crate::constants::{PROJECT_KIND_BASECAMP_QML, PROJECT_KIND_LEZ};
 use crate::model::{Project, RepoRef};
 use crate::state::write_text;
 use crate::DynResult;
@@ -87,7 +87,6 @@ pub(crate) fn require_lez_repo<'a>(project: &'a Project, command: &str) -> DynRe
         .as_ref()
         .ok_or_else(|| anyhow!("invalid scaffold.toml: missing [repos.lez] for LEZ project"))
 }
-
 
 pub(crate) fn find_project_root(mut dir: PathBuf) -> Option<PathBuf> {
     loop {

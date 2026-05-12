@@ -113,7 +113,10 @@ fn render_template_text(raw: &str, ctx: &OverlayRenderContext) -> DynResult<Stri
         .replace("{{lez_pin}}", &ctx.lez_pin)
         .replace("{{plugin_name}}", &ctx.plugin_name)
         .replace("{{project_title}}", &ctx.project_title)
-        .replace("{{module_builder_flake_url}}", &ctx.module_builder_flake_url)
+        .replace(
+            "{{module_builder_flake_url}}",
+            &ctx.module_builder_flake_url,
+        )
         .replace("{{basecamp_data_root}}", &ctx.basecamp_data_root)
         .replace(
             "{{basecamp_runtime_variant}}",
